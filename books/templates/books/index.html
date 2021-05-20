@@ -12,13 +12,11 @@
 </head>
 
 <body>
-    <h1>Django Books app</h1>
-    <h3>{{name}}</h3>
     <section class="py-10">
         <h2 class="text-center text-4xl">Programming books</h2>
         <div class="grid grid-cols-4 gap-4 mt-10">
             {% for book in books %}
-            <a href="/book/{{book.id}}" class="justify-self-center text-center my-4" target="_blank" >
+            <a href="{% url 'book.show' book.id%}" class="justify-self-center text-center my-4" target="_blank" >
                 <div class="justify-self-center">
                     
                     <img src={{book.thumbnailUrl}} width="200" />
