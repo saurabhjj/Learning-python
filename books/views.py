@@ -2,6 +2,16 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.http import Http404
 import json
 from books.models import Book,Review
+from django.views.generic import ListView,DetailView
+
+# Using generics
+class BookListView(ListView):
+  def get_queryset(self) :
+        return Book.objects.all()
+
+
+class BookDetailView(DetailView):
+    model=Book
 
 
 #get data from a json file
@@ -9,6 +19,7 @@ bookData = open('/Users/saurabhjj/POC/python/bookstore/books/resources/books.jso
 
 data = json.loads(bookData)
 
+#To explicitly load a url
 # Create your views here.
 def index(request):
     dbData=Book.objects.all()
