@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404,redirect
+from django.http import Http404
 import json
-from books.models import Book
+from books.models import Book,Review
 
 
 #get data from a json file
@@ -23,9 +24,16 @@ def index(request):
 # Create your views here.
 def show(request,id):
 
+    
     #data from DB
-    singleBook = Book.objects.get(pk=id)
+    try:
+        singleBook = Book.objects.get(pk=id)
+    except Book.DoesNotExist:
+        raise Http404('Book does not exist')
 
+    #inbuilt exception handlig
+    singleBook = get_object_or_404(Book,pk=id)
+    reviews=Review.objects.filter(book_id=id).order_by('-created_at')
 
     #data from Json file
     #singleBook = list()
@@ -34,5 +42,12 @@ def show(request,id):
       #      singleBook = book
 
 
-    context = {'book':singleBook}
+    context = {'book':singleBook,'reviews':reviews}
     return render (request,'books/show.html',context)
+
+
+def review(request,id):
+    review = request.POST['review']
+    newReview=Review(body=review,book_id=id)
+    newReview.save()
+    return redirect('/book')

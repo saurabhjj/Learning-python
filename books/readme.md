@@ -18,3 +18,4 @@ get a single object based on where:                                 Book.objects
 delete all the data from a table:                                   python3 manage.py flush
 create super user:                                                  python3 manage.py createsuperuser
 to override the default names in the DB:                            override the ___str__ function
+print to console:                                                   print("Hello World")
