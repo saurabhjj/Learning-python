@@ -13,6 +13,12 @@ class BookListView(ListView):
 class BookDetailView(DetailView):
     model=Book
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['reviews'] = context['book'].review_set.all()
+        context['authors'] = context['book'].authors.all()
+        return context
+
 
 #get data from a json file
 bookData = open('/Users/saurabhjj/POC/python/bookstore/books/resources/books.json').read()

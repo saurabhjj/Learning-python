@@ -1,32 +1,18 @@
-<!DOCTYPE html>
-<html>
+{% extends 'books/base.html' %}
 
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Django </title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-</head>
+{% block content%}
+book_list
 
-<body>
-    book_list
-    <section class="py-10">
-        <h2 class="text-center text-4xl">Programming books</h2>
-        <div class="grid grid-cols-4 gap-4 mt-10">
-            {% for book in book_list %}
-            <a href="{% url 'book.show' book.id%}" class="justify-self-center text-center my-4" target="_blank" >
-                <div class="justify-self-center">
-                    
-                    <img src={{book.thumbnailUrl}} width="200" />
-                    <p>{{book.title}}</p>
-                </div>
-            </a>
-            {% endfor %}
+<h2 class="text-center text-4xl">Programming books</h2>
+<div class="grid grid-cols-4 gap-4 mt-10">
+    {% for book in book_list %}
+    <a href="{% url 'book.show' book.id%}" class="justify-self-center text-center my-4" target="_blank">
+        <div class="justify-self-center">
+
+            <img src={{book.thumbnailUrl}} width="200" />
+            <p>{{book.title}}</p>
         </div>
-    </section>
-</body>
-
-</html>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}
