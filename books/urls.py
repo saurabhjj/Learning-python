@@ -1,6 +1,7 @@
 from . import views
 from django.urls import path
 
+
 urlpatterns =[
     path('/',views.BookListView.as_view(),name='book.all'),
     path('/index',views.index,name='book.all.index'),

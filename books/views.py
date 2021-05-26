@@ -3,14 +3,17 @@ from django.http import Http404
 import json
 from books.models import Book,Review
 from django.views.generic import ListView,DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Using generics
-class BookListView(ListView):
-  def get_queryset(self) :
+class BookListView(LoginRequiredMixin,ListView):
+    login_url='/login/'
+
+    def get_queryset(self) :
         return Book.objects.all()
 
 
-class BookDetailView(DetailView):
+class BookDetailView(LoginRequiredMixin,DetailView):
     model=Book
 
     def get_context_data(self, **kwargs):
