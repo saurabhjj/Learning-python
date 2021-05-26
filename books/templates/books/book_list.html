@@ -1,9 +1,12 @@
 {% extends 'books/base.html' %}
 
+{% block nav_title%}
+Programming books
+{% endblock %}
+
+
 {% block content%}
 book_list
-
-<h2 class="text-center text-4xl">Programming books</h2>
 <div class="grid grid-cols-4 gap-4 mt-10">
     {% for book in book_list %}
     <a href="{% url 'book.show' book.id%}" class="justify-self-center text-center my-4" target="_blank">
