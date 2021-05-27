@@ -6,14 +6,14 @@ from django.views.generic import ListView,DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Using generics
-class BookListView(LoginRequiredMixin,ListView):
+class BookListView(ListView):
     login_url='/login/'
 
     def get_queryset(self) :
         return Book.objects.all()
 
 
-class BookDetailView(LoginRequiredMixin,DetailView):
+class BookDetailView(DetailView):
     model=Book
 
     def get_context_data(self, **kwargs):
@@ -67,9 +67,13 @@ def show(request,id):
 
 
 def review(request,id):
-    review = request.POST['review']
-    newReview=Review(body=review,book_id=id)
-    newReview.save()
+    if request.user.is_authenticated:
+        review = request.POST['review']
+        userName = request.user
+        print(userName)
+        singleBook = get_object_or_404(Book,pk=id)
+        newReview=Review(body=review,user=userName,book_id=singleBook)
+        newReview.save()
     return redirect('/book')
 
 

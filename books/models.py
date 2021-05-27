@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Author(models.Model):
@@ -30,7 +31,9 @@ class Book(models.Model):
 
 class Review(models.Model):
     body=models.TextField(null=True)
+    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     created_at=models.DateTimeField(auto_now=True)
     book_id=models.ForeignKey(Book,on_delete=models.CASCADE)
+
 
 

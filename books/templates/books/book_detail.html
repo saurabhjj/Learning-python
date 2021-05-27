@@ -38,6 +38,7 @@ Bookstore - {{book.title}}
                 </div>
 
                 <div class="mt-10">
+                    {% if user.is_authenticated %}
                     <form method="Post" action="{% url 'book.review' book.id%}">
                         {% csrf_token %}
                         <textarea class="border rounded p-2 w-full" name="review" id="" cols="30" rows="5"
@@ -46,11 +47,23 @@ Bookstore - {{book.title}}
                         <button type="submit" class="float-right border rounded p-2 bg-gray-800 text-white">Submit
                         </button>
                     </form>
+                    {% else %}
+                    <p>
+                        <a class="text-blue-600" href={% url 'login' %}?next={{request.path}}>Login</a> to write a review
+                    </p>
+                        
+                    {% endif %}
                 </div>
-                <div class="mt-10">
+                <div class="mt-20">
                     {% for review in reviews %}
-                    <p>{{review.body}}</p>
-
+                    <div class="my-6">
+                        <div class="flex justify-between">
+                            <p class="text-gray-400">{{review.user}}</p>
+                            <p class="text-gray-400">{{review.created_at}}</p>
+                        </div>
+                      
+                        <p>{{review.body}}</p>
+                    </div>
                     {% endfor %}
                 </div>
 
