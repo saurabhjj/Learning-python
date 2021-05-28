@@ -19,3 +19,4 @@ delete all the data from a table:                                   python3 mana
 create super user:                                                  python3 manage.py createsuperuser
 to override the default names in the DB:                            override the ___str__ function
 print to console:                                                   print("Hello World")
+for deployment, please look at deploy.md

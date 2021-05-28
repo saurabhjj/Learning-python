@@ -41,9 +41,10 @@ Bookstore - {{book.title}}
                     {% if user.is_authenticated %}
                     <form method="Post" action="{% url 'book.review' book.id%}" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <textarea class="border rounded p-2 w-full" name="review" id="" cols="30" rows="5"
+                        <!-- <textarea class="border rounded p-2 w-full" name="review" id="" cols="30" rows="5"
                             placeholder="Write your Review"></textarea>
-                        <input type="file" name="image">
+                        <input type="file" name="image"> -->
+                        {{ form.as_p }}
                         <button type="submit" class="float-right border rounded p-2 bg-gray-800 text-white">Submit
                         </button>
                     </form>
@@ -63,7 +64,15 @@ Bookstore - {{book.title}}
                         </div>
                       
                         <p>{{review.body}}</p>
-                        <img src="{{review.image}}" width="100">
+
+                        <!-- if using option2 on views.py -->
+
+                        {%if review.image %}
+                            <img src="{{review.image.url}}" width="100">
+                            {% endif %}
+                        <!-- 
+                            if using option 1 on view.py
+                            <img src="{{review.image}}" width="100"> -->
                     </div>
                     {% endfor %}
                 </div>
