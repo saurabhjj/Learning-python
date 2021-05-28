@@ -20,3 +20,5 @@ create super user:                                                  python3 mana
 to override the default names in the DB:                            override the ___str__ function
 print to console:                                                   print("Hello World")
 for deployment, please look at deploy.md
+to view the list of installed dependencies :                        pip freeze
+to write the list of installed dependencies to a file:              pip freeze > <filename>
