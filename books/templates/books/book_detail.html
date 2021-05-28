@@ -15,7 +15,7 @@ Bookstore - {{book.title}}
     <div class="flex justify-between mt-10">
         <div class="flex justify-between">
             <div class="w-3/12">
-                <img src={{book.thumbnailUrl}} width="200" />
+                <img src={{book.image.url}} width="200" />
             </div>
             <div class="w-9/12">
                 <p class="text-3xl">About</p>
@@ -39,11 +39,11 @@ Bookstore - {{book.title}}
 
                 <div class="mt-10">
                     {% if user.is_authenticated %}
-                    <form method="Post" action="{% url 'book.review' book.id%}">
+                    <form method="Post" action="{% url 'book.review' book.id%}" enctype="multipart/form-data">
                         {% csrf_token %}
                         <textarea class="border rounded p-2 w-full" name="review" id="" cols="30" rows="5"
                             placeholder="Write your Review"></textarea>
-
+                        <input type="file" name="image">
                         <button type="submit" class="float-right border rounded p-2 bg-gray-800 text-white">Submit
                         </button>
                     </form>
@@ -63,6 +63,7 @@ Bookstore - {{book.title}}
                         </div>
                       
                         <p>{{review.body}}</p>
+                        <img src="{{review.image}}" width="100">
                     </div>
                     {% endfor %}
                 </div>

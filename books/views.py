@@ -4,6 +4,7 @@ import json
 from books.models import Book,Review
 from django.views.generic import ListView,DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.files.storage import FileSystemStorage
 
 # Using generics
 class BookListView(ListView):
@@ -68,11 +69,14 @@ def show(request,id):
 
 def review(request,id):
     if request.user.is_authenticated:
+        image=request.FILES['image']
+        fs = FileSystemStorage()
+        name = fs.save(image.name,image)
         review = request.POST['review']
         userName = request.user
         print(userName)
         singleBook = get_object_or_404(Book,pk=id)
-        newReview=Review(body=review,user=userName,book_id=singleBook)
+        newReview=Review(body=review,user=userName,book_id=singleBook,image=fs.url(name))
         newReview.save()
     return redirect('/book')
 

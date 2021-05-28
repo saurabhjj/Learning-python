@@ -22,6 +22,7 @@ class Book(models.Model):
     authors=models.TextField(null=True)
     categories=models.TextField(null=True)
     authors=models.ManyToManyField(Author)
+    image=models.ImageField(upload_to="images",null=True)
 
     def __str__(self):
         return self.title
@@ -34,6 +35,7 @@ class Review(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     created_at=models.DateTimeField(auto_now=True)
     book_id=models.ForeignKey(Book,on_delete=models.CASCADE)
+    image=models.ImageField(upload_to="images/review",null=True)
 
 
 

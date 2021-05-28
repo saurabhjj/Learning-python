@@ -129,3 +129,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL='/book'
 LOGIN_URL='/login/'
 LOGOUT_REDIRECT_URL='/login/'
+
+#file based email
+# EMAIL_BACKEND='django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH=BASE_DIR/'tmp/app-messages'
+
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '6c2a5ebb29f8af'
+EMAIL_HOST_PASSWORD = '6c1100b19e97aa'
+EMAIL_PORT = '2525'
+
+MEDIA_ROOT="media"
+MEDIA_URL="media/"
